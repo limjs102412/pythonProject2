@@ -22,6 +22,7 @@ class AI_Chatbot_page():
                             
                        \n👉 그 외 친화력 좋은 묘종, 고양이 언어 등을 알 수 있습니다! \n
                        \n '친화력 좋은 묘종을 알려줘' '고양이가 골골거렸어' 등등 다양한 말을 건네보세요!\n  """)
+        chat()
 
 if __name__=='__main__':
     m=AI_Chatbot_page()

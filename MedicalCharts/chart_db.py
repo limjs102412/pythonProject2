@@ -23,7 +23,12 @@ class ChartDao:
                             Conael_sequestrum Int default 0,
                             Conael_sequestrum_percent char(10),
                             Corneal_ulcer Int default 0,
-                            Corneal_ulcer_percent char(10)
+                            Corneal_ulcer_percent char(10),
+                            grad_Blepharitis BLOB,
+                            grad_Deep_keratitis BLOB,
+                            grad_Conjunctivitis BLOB,
+                            grad_Conael_sequestrum BLOB,
+                            grad_Corneal_ulcer BLOB
                             )''')
 
 
@@ -39,20 +44,20 @@ class ChartDao:
     def select1(self,Cat_Num,Date):
         conn = sqlite3.connect('mydb.db')
         c = conn.cursor()
-        c.execute(f"SELECT name, image,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent FROM image WHERE Cat_Num='{Cat_Num}' and Date='{Date}'")
+        c.execute(f"SELECT name, image, Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent, grad_Blepharitis, grad_Deep_keratitis, grad_Conjunctivitis, grad_Conael_sequestrum, grad_Corneal_ulcer FROM image WHERE Cat_Num='{Cat_Num}' and Date='{Date}'")
         images = c.fetchall()
 
         return images
 
     # image테이블에서 입력받은 정보를 삽입하는 메서드
-    def upload_image1(self,Cat_Num,Date,image_name,uploaded_image,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent):
+    def upload_image1(self,Cat_Num,Date,image_name,uploaded_image,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent,grad_Blepharitis,grad_Deep_keratitis,grad_Conjunctivitis,grad_Conael_sequestrum, grad_Corneal_ulcer):
         image = Image.open(uploaded_image)
         image_bytes = io.BytesIO()
         image.save(image_bytes, format='PNG')
         image_data = image_bytes.getvalue()
         conn = sqlite3.connect('mydb.db')
         c = conn.cursor()
-        c.execute("INSERT INTO image (Cat_Num, Date, name, image,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent) VALUES (?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?)",
-                  (Cat_Num,Date, image_name, image_data,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent))
+        c.execute("INSERT INTO image (Cat_Num, Date, name, image,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent,grad_Blepharitis,grad_Deep_keratitis,grad_Conjunctivitis,grad_Conael_sequestrum, grad_Corneal_ulcer) VALUES (?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?,?,?,?,?)",
+                  (Cat_Num,Date, image_name, image_data,Blepharitis, Blepharitis_percent, Deep_keratitis, Deep_keratitis_percent, Conjunctivitis,Conjunctivitis_percent, Conael_sequestrum, Conael_sequestrum_percent, Corneal_ulcer, Corneal_ulcer_percent,grad_Blepharitis,grad_Deep_keratitis,grad_Conjunctivitis,grad_Conael_sequestrum, grad_Corneal_ulcer))
         conn.commit()
         st.success("이미지가 저장되었습니다. 진단 기록 탭에서 확인하세요")

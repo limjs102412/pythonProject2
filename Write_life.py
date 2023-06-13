@@ -292,53 +292,65 @@ class Daylist_page:
                             st.write('---')
                             subcol13, subcol14, subcol15 = st.columns([1, 1, 3])
                             subcol13.markdown('###### ▪️ 몸무게')
-                            subcol14.text_input('몸무게', value=str(weight_cd) + 'kg', disabled=True,label_visibility='collapsed')
+                            input2_weight=subcol14.text_input('몸무게', value=str(weight_cd) , label_visibility='collapsed')
+                            subcol15.write('kg')
                             # 놀이시간
                             st.write('---')
                             subcol13, subcol14, subcol15 = st.columns([1, 1, 3])
                             subcol13.markdown('###### ▪️ 놀이시간')
-                            hour = 'hour'
-                            subcol14.text_input('놀이시간', value=str(playtime_cd) + hour, disabled=True,label_visibility='collapsed')
+                            input2_playtime=subcol14.text_input('놀이시간', value=str(playtime_cd) ,label_visibility='collapsed')
+                            subcol15.write('hour')
                             # 사료급여량
                             st.write('---')
                             st.markdown('###### ▪️ 사료급여량')
-                            gram = 'gram'
                             subcol1, subcol2, subcol3, subcol4, subcol5, subcol6 = st.columns([1, 2, 1, 2, 1, 2],gap='medium')
                             subcol1.write('아침')
-                            subcol2.text_input('아침사료량', value=str(breakfast_food_cd) + gram, disabled=True,label_visibility='collapsed')
+                            input2_breakfastfood=subcol2.text_input('아침사료량(gram)', value=str(breakfast_food_cd),label_visibility='collapsed')
                             subcol3.write('점심')
-                            subcol4.text_input('점심사료량', value=str(lunch_food_cd) + gram, disabled=True,label_visibility='collapsed')
+                            input2_lunchfood=subcol4.text_input('점심사료량(gram)', value=str(lunch_food_cd) ,label_visibility='collapsed')
                             subcol5.write('저녁')
-                            subcol6.text_input('저녁사료량', value=str(dinner_food_cd) + gram, disabled=True,label_visibility='collapsed')
+                            input2_dinnerfood=subcol6.text_input('저녁사료량(gram)', value=str(dinner_food_cd) , label_visibility='collapsed')
                             # 음수량
                             st.write('---')
                             st.markdown('###### ▪️ 음수량')
-                            ml = 'ml'
                             subcol1, subcol2, subcol3, subcol4, subcol5, subcol6 = st.columns([1, 2, 1, 2, 1, 2],gap='medium')
                             subcol1.write('아침')
-                            subcol2.text_input('아침음수량', value=str(breakfast_water_cd) + ml, disabled=True,label_visibility='collapsed')
+                            input2_breakfastwater=subcol2.text_input('아침음수량(ml)', value=str(breakfast_water_cd), label_visibility='collapsed')
                             subcol3.write('점심')
-                            subcol4.text_input('점심음수량', value=str(lunch_water_cd) + ml, disabled=True,label_visibility='collapsed')
+                            input2_lunchwater=subcol4.text_input('점심음수량(ml)', value=str(lunch_water_cd), label_visibility='collapsed')
                             subcol5.write('저녁')
-                            subcol6.text_input('저녁음수량', value=str(dinner_water_cd) + ml, disabled=True,label_visibility='collapsed')
+                            input2_dinnerwater=subcol6.text_input('저녁음수량(ml)', value=str(dinner_water_cd), label_visibility='collapsed')
                             # 특이사항
                             st.write('---')
                             st.markdown('###### ▪️ 오늘의 특이사항')
                             c_col1, c_col2, c_col3, c_col4, c_col5 = st.columns(5)
-                            c_col1.checkbox(label=":drop_of_blood:", value=bool(check1_cd), disabled=True)
-                            c_col2.checkbox(label="🪫", value=bool(check2_cd), disabled=True)
-                            c_col3.checkbox(label="💊", value=bool(check3_cd), disabled=True)
-                            c_col4.checkbox(label="🌡", value=bool(check4_cd), disabled=True)
-                            c_col5.checkbox(label="🛁", value=bool(check5_cd), disabled=True)
+                            input2_check1=c_col1.checkbox(label=":drop_of_blood:", value=bool(check1_cd))
+                            input2_check2=c_col2.checkbox(label="🪫", value=bool(check2_cd))
+                            input2_check3=c_col3.checkbox(label="💊", value=bool(check3_cd))
+                            input2_check4=c_col4.checkbox(label="🌡", value=bool(check4_cd))
+                            input2_check5=c_col5.checkbox(label="🛁", value=bool(check5_cd))
                             st.write("")
                             c_col1, c_col2, c_col3, c_col4, c_col5 = st.columns(5)
-                            c_col1.checkbox(label="👂", value=bool(check6_cd), disabled=True)
-                            c_col2.checkbox(label="🩺", value=bool(check7_cd), disabled=True)
-                            c_col3.checkbox(label="😿", value=bool(check8_cd), disabled=True)
-                            c_col4.checkbox(label="😺", value=bool(check9_cd), disabled=True)
-                            c_col5.checkbox(label="😸", value=bool(check10_cd), disabled=True)
+                            input2_check6=c_col1.checkbox(label="👂", value=bool(check6_cd))
+                            input2_check7=c_col2.checkbox(label="🩺", value=bool(check7_cd))
+                            input2_check8=c_col3.checkbox(label="😿", value=bool(check8_cd))
+                            input2_check9=c_col4.checkbox(label="😺", value=bool(check9_cd))
+                            input2_check10=c_col5.checkbox(label="😸", value=bool(check10_cd))
                             st.markdown('###### ▪️ 메모')
-                            st.text_area('memo', value=memo_cd, disabled=True, label_visibility="collapsed")
+                            input2_memo=st.text_area('memo', value=memo_cd, label_visibility="collapsed")
+                            modi_btn=st.button('수정')
+                            if modi_btn:
+                                self.daylistsv.modifyDaylist(cat_info[3], choose_date, input2_weight, input2_breakfastfood,
+                                                          input2_lunchfood, input2_dinnerfood, input2_breakfastwater,
+                                                          input2_lunchwater, input2_dinnerwater, input2_playtime,
+                                                          input2_check1,
+                                                          input2_check1, input2_check3, input2_check4, input2_check5,
+                                                          input2_check6,
+                                                          input2_check7, input2_check8, input2_check9, input2_check10,
+                                                          input2_memo)
+                                st.success(f'{choose_date}, {mycat}의 일지를 저장합니다.', icon="✅")
+
+
                     # 날짜에 맞는 정보가 없는 경우
                     else:
                         st.info("기록이 없는 날입니다. 오늘이라면 추가해주세요", icon="✍🏼")
