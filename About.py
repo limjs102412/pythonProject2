@@ -6,18 +6,21 @@ import seaborn as sns
 
 # 한글 폰트 이용 관련
 import platform
-st.set_option('deprecation.showPyplotGlobalUse', False)
+import matplotlib.font_manager as fm
 from matplotlib import font_manager, rc
 plt.rcParams['axes.unicode_minus'] = False
-if platform.system() == 'Darwin':  # 맥OS
+if platform.system() == 'Darwin': # 맥OS
     rc('font', family='AppleGothic')
-elif platform.system() == 'Windows':  # 윈도우
+elif platform.system() == 'Windows': # 윈도우
     path = "c:/Windows/Fonts/malgun.ttf"
     font_name = font_manager.FontProperties(fname=path).get_name()
     rc('font', family=font_name)
 else:
-    print('Unknown system...  sorry~~~')
+    print('Unknown system... sorry~~~')
 fontprop = fm.FontProperties(fname="font/NanumGothic.ttf")
+
+# 경고 무시 코드
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 
@@ -73,7 +76,7 @@ def About_page():
                                        startangle=90, explode=explode, wedgeprops=wedgeprops,
                                        textprops={'fontsize': 20}, shadow=True, pctdistance=0.7)
     ax_disease.set_aspect('equal')
-    legend_labels = ['안검염', '비궤양성각막염', '각막부골편', '결막염', '각막궤양']
+    legend_labels = ['a', '비궤양성각막염', '각막부골편', '결막염', '각막궤양']
     ax_disease.legend(wedges, legend_labels, loc='center left', bbox_to_anchor=(0.95, 0.8), fontsize=20)
     plt.tight_layout()
     fig_disease.savefig("disease_pie_chart.png", dpi=200)# 해상도 조정
