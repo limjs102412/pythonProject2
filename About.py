@@ -118,10 +118,10 @@ def About_page():
     with tabs[2]:
         fig_breed, ax_breed = plt.subplots(figsize=(10, 6))
         breed_age_mean = selected_data.pivot_table(index='breed', columns='eye_position', values='age_mean')
-        breed_age_mean = breed_age_mean.sort_values(by=['right eye', 'left eye'], ascending=False)
+        breed_age_mean = breed_age_mean.sort_values(by=['Right Eye', 'Left Eye'], ascending=False)
         heatmap = sns.heatmap(breed_age_mean, cmap='YlOrBr', annot=True, fmt='.2f', cbar=False, linecolor='black',
                               annot_kws={'fontsize': 8, 'fontweight': 'bold'})
-        ax_breed.set_xlabel('고양이 안구', rotation=0, ha='right')
-        ax_breed.set_ylabel('고양이 종', rotation=0, ha='right')
+        ax_breed.set_xlabel('eyes', rotation=0, ha='right')
+        ax_breed.set_ylabel('breed', rotation=0, ha='right')
         plt.xticks(rotation=45)
         st.pyplot(fig_breed)
