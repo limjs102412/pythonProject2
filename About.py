@@ -76,7 +76,7 @@ def About_page():
                                        startangle=90, explode=explode, wedgeprops=wedgeprops,
                                        textprops={'fontsize': 20}, shadow=True, pctdistance=0.7)
     ax_disease.set_aspect('equal')
-    legend_labels = ['a', '비궤양성각막염', '각막부골편', '결막염', '각막궤양']
+    legend_labels = ['blepharitis', 'non-ulcerative keratitis', 'corneal bone fragment', 'conjunctivitis', 'corneal ulcer']
     ax_disease.legend(wedges, legend_labels, loc='center left', bbox_to_anchor=(0.95, 0.8), fontsize=20)
     plt.tight_layout()
     fig_disease.savefig("disease_pie_chart.png", dpi=200)# 해상도 조정
@@ -94,8 +94,8 @@ def About_page():
         fig_age, ax_age = plt.subplots(figsize=(10, 6))
         sns.countplot(x='age', data=selected_data, palette='YlOrBr_r', order=selected_data['age'].value_counts().index,
                       ax=ax_age, linewidth=1, edgecolor='black')
-        ax_age.set_xlabel('연령[살]')
-        ax_age.set_ylabel('개체[마리]', rotation=0, ha='right')
+        ax_age.set_xlabel('age')
+        ax_age.set_ylabel('population', rotation=0, ha='right')
         plt.xticks(rotation=45)
         plt.tight_layout()
         st.pyplot(fig_age)
@@ -118,7 +118,7 @@ def About_page():
     with tabs[2]:
         fig_breed, ax_breed = plt.subplots(figsize=(10, 6))
         breed_age_mean = selected_data.pivot_table(index='breed', columns='eye_position', values='age_mean')
-        breed_age_mean = breed_age_mean.sort_values(by=['오른쪽눈', '왼쪽눈'], ascending=False)
+        breed_age_mean = breed_age_mean.sort_values(by=['right eye', 'left eye'], ascending=False)
         heatmap = sns.heatmap(breed_age_mean, cmap='YlOrBr', annot=True, fmt='.2f', cbar=False, linecolor='black',
                               annot_kws={'fontsize': 8, 'fontweight': 'bold'})
         ax_breed.set_xlabel('고양이 안구', rotation=0, ha='right')
