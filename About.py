@@ -77,7 +77,7 @@ def About_page():
                                        textprops={'fontsize': 20}, shadow=True, pctdistance=0.7)
     ax_disease.set_aspect('equal')
     legend_labels = ['Blepharitis', 'Non-ulcerative keratitis', 'Corneal bone fragment', 'Conjunctivitis', 'Corneal ulcer']
-    ax_disease.legend(wedges, legend_labels, loc='center left', bbox_to_anchor=(0.95, 0.8), fontsize=20)
+    ax_disease.legend(wedges, legend_labels, loc='center left', bbox_to_anchor=(0.95, 0.8), fontsize=15)
     plt.tight_layout()
     fig_disease.savefig("disease_pie_chart.png", dpi=200)# 해상도 조정
     st.image("disease_pie_chart.png")
